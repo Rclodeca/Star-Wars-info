@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CardList from './components/CardList.js';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+
+	constructor() {
+		super();
+		this.state = {
+			movies: []
+		}
+	}
+
+	componentDidMount() {	
+		fetch('https://swapi.co/api/films/')
+			.then(response => response.json())
+			.then(response => this.setState({movies: response.results}));
+	}
+
+	render() {
+		const { movies } = this.state;
+		const filterMovies = movies.filter(mov => {
+			return mov.title.toLowerCase();
+		});
+		
+		if (movies.length === 0) {
+			return (
+				<h1>Loading...</h1>
+			);
+		} else {
+			return (
+				<div>
+					<h1>Star Wars Info</h1>
+					<br />
+					<CardList movies={movies}/>
+				</div>	
+			);
+		}
+	}
 }
 
 export default App;
