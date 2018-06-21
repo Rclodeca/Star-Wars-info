@@ -1,3 +1,7 @@
+## Star Wars Info
+
+Uses [SWAPI](https://swapi.co/) and React.js to display information on all Star Wars movies
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
